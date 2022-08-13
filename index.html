@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Juego de Volados</title>
+    <link rel="stylesheet" href="./css/main.css" />
+  </head>
+
+  <body class="min-h-screen bg-slate-100 text-stone-900">
+    <!-- Bienvenido -->
+    <header class="min-h-[70vh] flex items-center justify-center bg-slate-900 text-slate-100 px-8 py-16">
+      <main class="max-w-3xl mx-auto">
+        <h2 class="text-4xl font-bold uppercase mb-2">¡Bienvenido!</h2>
+        <p class="text-base text-justify leading-6 mb-1">
+          Esta aplicaion web podras conocer el <strong>juego de volados</strong>, realizar apuesta y simulacion con el metodo de montecarlo tambien puedes conocer las probabilidades de ganar segun las variables que desees configurar dentro de los parametros permitidos. Podras elegir una carta y apostar si caerá
+          <span class="italic">"caballo o rey"</span> teniendo en cuenta de que
+          la probabilidad de ganar o perder es de 50 a 50.
+        </p>
+      </main>
+    </header>
+
+    <!-- Wrapper User  -->
+    <main class="max-w-2xl px-8 py-16 mx-auto mb-12">
+      <!-- Wrapper Info User -->
+      <div class="w-full flex flex-wrap items-center justify-between py-6">
+        <div class="w-6/12 flex flex-col">
+          <h4 class="text-2xl font-medium">ADRIANFER</h4>
+          <p
+            class="w-full text-green-600 text-base  font-light uppercase"
+          >
+            JUGADOR
+          </p>
+        </div>
+        <div class="w-6/12 flex flex-col justify-center text-end">
+          <h4 id="presupuesto" class="text-2xl font-medium">$70</h4>
+          <p class="text-green-600 text-base font-light uppercase">
+            Disponible
+          </p>
+        </div>
+        
+        <div class="w-full flex items-center justify-around mt-6">
+          <div class="flex flex-wrap items-center justify-center">
+            <p class="text-base font-light text-center uppercase mr-4">Meta</p>
+            <h4 class="text-2xl font-medium text-center text-green-600">$120</h4>
+          </div>
+          <div class="flex flex-wrap items-center justify-center">
+            <p class="text-base font-light text-center uppercase mr-4">Apuesta</p>
+            <h4
+              id="apuesta"
+              class="relative top-0 text-2xl font-medium text-center text-green-600"
+            >
+              $10
+            </h4>
+          </div>
+        </div>
+      </div>
+      <!-- Wrapper App -->
+      <form class="w-full py-6">
+        <h4
+        id="message"
+        class="w-full text-2xl font-medium text-center uppercase pb-12"
+      >
+        ¡Debes de selecionar Caballo o Rey!
+      </h4>
+        <!-- Wrapper Cards Playing -->
+        <div class="w-full flex items-center justify-around mb-8">
+          <div
+          id="card-caballo"
+          style="background-image: url(./img/caballo.png)"
+          class="w-5/12 h-72 flex items-center justify-center bg-center bg-no-repeat bg-contain border hover:border-green-600 hover:bg-green-200 rounded shadow-md cursor-pointer p-4"
+        ></div>
+
+        <div
+          id="card-rey"
+          style="background-image: url(./img/rey.png)"
+          class="w-5/12 h-72 flex items-center justify-center bg-center bg-no-repeat bg-contain border hover:border-green-600 hover:bg-green-200 rounded shadow-md cursor-pointer p-4"
+          data-status=""
+        ></div>
+        </div>
+        <!-- Button-Play and Letter Description -->
+        <div class="w-full flex flex-col items-center justify-center">
+          <button
+            id="btn-play"
+            class="border border-green-600 bg-green-200 text-green-600 text-lg font-bold rounded-md px-8 py-4 mb-2 hover:bg-green-600 hover:text-green-200 hover:shadow-md transition-all duration-300"
+          >
+            JUGAR PARTIDA
+          </button>
+          <p id="letter" class="text-center text-base font-light">
+            ¡Aun no ah selecionado Caballo o Leon!
+          </p>
+        </div>
+      </form>
+    </main>
+
+    <!-- Wrapper Introdution and Reglas -->
+    <section id="reglas" class="bg-slate-900 text-slate-100 px-8 py-16 mb-12">
+      <main class="max-w-3xl mx-auto">
+        <div class="mb-6">
+          <h2 class="text-2xl text-center font-medium uppercase mb-4">
+            Intruciones
+          </h2>
+          <p class="text-base text-justify leading-6 mb-2">
+            Existe un método viejo para jugar volados, que consiste en doblar la
+            apuesta cada vez que se pierde.
+          </p>
+          <p class="text-base text-justify leading-6 mb-2">
+            <strong>Por ejemplo</strong>, si se apuesta $X cantidad de dinero y se
+            pierde, entonces, se apuesta $2X; si en esta ocasión se vuelve a
+            perder, entonces, se apuesta $4X y así sucesivamente.
+          </p>
+          <p class="text-base text-justify leading-6 mb-2">
+            Sin embargo, si al seguir esta política sucede que la apuesta es mayor
+            que la cantidad de que se dispone, entonces, se apuesta lo que se
+            tiene disponible. Por el contrario, cada vez que se gane, la apuesta
+            será de $X.
+          </p>
+          <p class="text-base text-justify leading-6 mb-2">
+            Si la cantidad inicial disponible es de $30, la apuesta es de $10, la
+            ganancia es igual a la cantidad apostada, la probabilidad de ganar en
+            un volado es 0.5.
+          </p>
+        </div>
+        <div class="mb-6">
+          <h2 class="text-2xl text-center font-medium uppercase mb-4">Reglas</h2>
+          <ul class="list-disc pl-4">
+            <li class="text-base text-justify leading-6">
+              Cada vez que se pierde se debe de apostar el doble de lo que se
+              perdió.
+            </li>
+            <li class="text-base text-justify leading-6">
+              La ganancia del jugador es igual a la cantidad apostada.
+            </li>
+            <li class="text-base text-justify leading-6">
+              La cantidad inicial de la apuesta no puede ser igual o mayor a lo
+              que el jugador dispone en su primera partida.
+            </li>
+            <li class="text-base text-justify leading-6">
+              El jugador será declarado perdedor si pierde toda su cantidad
+              inicial.
+            </li>
+            <li class="text-base text-justify leading-6">
+              La partida es finalizada cuando el jugador ha ganado lo que se
+              indica como meta.
+            </li>
+          </ul>
+        </div>
+      </main>
+    </section>
+
+    <!-- Wrapper Simulation -->
+    <section class="px-8 py-16 mb-12">
+      <main class="max-w-3xl mx-auto">
+        <div class="mb-6">
+          <h2 class="text-2xl text-center font-medium uppercase mb-4">
+            Metodo Montecarlo
+          </h2>
+          <p class="text-base text-justify leading-6 mb-2">
+            El método de Montecarlo es un método no determinista o estadístico
+            numérico, usado para aproximar expresiones matemáticas complejas y
+            costosas de evaluar con exactitud.
+          </p>
+          <p class="text-base text-justify leading-6 mb-2">
+            Sabiendo esto la implementación del método montecarlos dentro del
+            juego de volados consiste en calcular el promedio de posibilidad de
+            ganar el juego según las partidas necesarias para llegar a la meta en
+            cada ronda.
+          </p>
+          <p class="text-base text-justify leading-6 mb-2">
+            formulación implementada:
+            <span class="font-medium italic">
+              Probabilidad = cantidad de veces que se ganó / cantidad de corridas
+            </span>
+          </p>
+        </div>
+        <form class="w-full flex flex-col">
+          <h2 class="text-2xl text-center font-medium uppercase mb-6">Simular</h2>
+  
+          <div class="w-full flex flex-col mb-4">
+            <label for="" class="font-medium pl-2 mb-2">¿Con que lado queremos jugar?</label>
+            <select name="select" class="text-slate-900 rounded p-2">
+              <option value="caballo" selected>Caballo</option>
+              <option value="rey">Rey</option>
+            </select>
+            <p class="text-slate-500 p-2">Esta es la carta a la cual le apostaras.</p>
+          </div>
+          <div class="w-full flex flex-col mb-4">
+            <label for="ss-presupuesto" class="font-medium pl-2 mb-2">¿Presupuesto?</label>
+            <input
+              id="ss-presupuesto"
+              type="text"
+              placeholder="Ingresar Presupuesto... "
+              class="text-slate-900 rounded p-2"
+            />
+            <p class="text-slate-500 p-2">Ud debe de ingresar un valor numerico real.</p>
+
+          </div>
+          <div class="w-full flex flex-col mb-4">
+            <label for="ss-finalidad" class="font-medium pl-2 mb-2">¿Meta?</label>
+            <input
+              id="ss-finalidad"
+              type="text"
+              placeholder="Ingresar Meta"
+              class="text-slate-900 rounded p-2"
+            />
+            <p class="text-slate-500 p-2">Ud debe de ingresar un valor numerico real.</p>
+          </div>
+          <button
+            id="btn-simular"
+            class="bg-green-200 text-green-600 border border-green-600 font-medium uppercase rounded p-2 my-6 hover:bg-green-600 hover:text-green-200 hover:shadow-md transition-all duration-300"
+          >
+            Simular
+          </button>
+  
+          <div id="show-simulation" class="w-full flex flex-col mb-4"></div>
+        </form>
+      </main>
+    </section>
+
+    <!-- Pie de Pagina -->
+    <footer class="bg-slate-900 text-slate-100 px-8 py-16">
+      <h4 class="text-center font-medium leading-6">
+        Desarrollador <span class="italic">@Adrianfer Martinez</span>
+      </h4>
+    </footer>
+
+    <!-- Script -->
+    <script src="./js/main.js" type="module"></script>
+  </body>
+</html>
